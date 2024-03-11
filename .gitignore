@@ -3,3 +3,4 @@ play*
 *.o
 *.out
 *.exe
+*exe*
