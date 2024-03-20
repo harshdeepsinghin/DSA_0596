@@ -10,5 +10,4 @@ int main (void)
 
 int parentheses_checker (char string[])
 {
-    
 }
