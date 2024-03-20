@@ -4,3 +4,4 @@ play*
 *.out
 *.exe
 *exe*
+.DS_Store
