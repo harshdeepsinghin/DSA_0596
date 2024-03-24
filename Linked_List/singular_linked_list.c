@@ -1,34 +1,38 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-// structure definition
 struct node
 {
     int data;
     struct node *next;
 };
 
+typedef struct node Node;           // Alias for `struct node`
+typedef struct node *NodePTR;       // Alias for `struct node *`
+
 int main(void)
 {
-    // creation
+    //creation
+    NodePTR head;
+    NodePTR newnode;
 
-    struct node *head;
-    struct node *newnode;
+    int tmp;
+    
+    newnode = (NodePTR)malloc(sizeof(Node));
 
-    head = (struct node *)malloc(sizeof(struct node));
+    printf("Enter data: ");
+    scanf(" %", &newnode->data);
 
-    (head == NULL)?printf("Yes\n"):printf("No\n");
-
-    newnode->data = 20;
     newnode->next = NULL;
 
-    head = newnode;
+    head = newnode;     // Head linked to first node
 
     printf("%d", head->data);
+
+
+    
+
+    return 0;
 }
-
-
-
-
 
 

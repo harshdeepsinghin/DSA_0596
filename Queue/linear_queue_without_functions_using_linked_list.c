@@ -53,7 +53,17 @@ int main (void)
 
     }
     
+    NodePTR front;
+    NodePTR rear;
+    NodePTR newnode;
 
+    newnode = (NodePTR)malloc(sizeof(Node));    // memory allocation
+
+    printf("Enter 1st element: ");
+    scanf(" %d", &newnode->data);
+
+    newnode->next = NULL;
+    front = rear = newnode;
 
     printf("\n\n### --- MAIN MENU --- ###\n\n0 - Main Menu (this)\n1 - Create\n2 - Traverse\n3 - Enqueue\n4 - Dequeue\n5 - Exit\n\n\n");
 
@@ -73,69 +83,89 @@ int main (void)
                 printf("Queue is alreay created!\n");
                 break;
             case 2:     // 2 - Traverse
-                if (FRONT < 0)
+                if (front == NULL)               // Empty queue
                 {
                     printf("\nEmpty Queue!\n\n");
                 }
-                else if (FRONT == REAR)
+                else if (front->next == NULL)    // Single element
                 {
                     printf("\nQueue elements:\n");
-                    printf("\n%d  <--  FRONT\n\n", QUEUE[REAR]);
+                    printf("\nFRONT  -->  %d  <--  REAR\n\n", front->data);
                 }
-                else
+                else                            // More than one element
                 {
                     printf("\nQueue elements:\n");
-                    int tmp = FRONT;
-                    printf("\n%d  <--  FRONT\n", QUEUE[tmp]);
-                    tmp++;
-                    while (tmp != REAR)
+                    NodePTR tmp = front;
+                    printf("\n%d  <--  FRONT\n", tmp->data);
+
+                    tmp = tmp->next;    // increment to next node to skip front
+                    while (tmp != rear)
                     {
-                        printf("%d\n", QUEUE[tmp]);
-                        tmp++;
+                        printf("%d\n", tmp->data);
+                        tmp = tmp->next;    // increment to next node
                     }
-                    printf("%d  <--  REAR\n\n", QUEUE[tmp]);
+                    printf("%d  <--  REAR\n\n", tmp->data);
                 }
                 break;
+
             case 3:     // 3 - Enqueue
-                if (!(REAR == SIZE-1))    // Not empty
+                if (front == NULL)    // Empty queue
                 {
-                    printf("Enter the element to enqueue: ");
-                    scanf(" %d", &ELEMENT);
-                    if (FRONT < 0)     // Empty queue
+                    newnode = (NodePTR)malloc(sizeof(Node));    // memory allocation
+                    
+                    if (newnode == NULL)    // Overflow
                     {
-                        FRONT = REAR = 0;
-                        QUEUE[REAR] = ELEMENT;
-                        printf("1st element - %d enqueued successfully!\n", ELEMENT);
+                        printf("Queue Overflow!\n");
                     }
-                    else                        // Partially filled queue
+                    else
                     {
-                        REAR++;
-                        QUEUE[REAR] = ELEMENT;
-                        printf("%d enqueued successfully!\n", ELEMENT);
+                        printf("Enter 1st element: ");
+                        scanf(" %d", &newnode->data);
+                        newnode->next = NULL;
+                        front = rear = newnode;
+
+                        printf("1st element - %d enqueued successfully!\n", rear->data);
                     }
                 }
-                else                            // Full queue
-                    printf("Queue Overflow!\n");
+                else                // Not empty queue
+                {
+                    newnode = (NodePTR)malloc(sizeof(Node));    // memory allocation
+                    
+                    if (newnode == NULL)    // Overflow
+                    {
+                        printf("Queue Overflow!\n");
+                    }
+                    else
+                    {
+                        printf("Enter element: ");
+                        scanf(" %d", &newnode->data);
+                        newnode->next = NULL;
+                        rear->next = newnode;
+                        rear = newnode;      // increment to next node
+
+                        printf("%d enqueued successfully!\n", rear->data);
+                    }
+                }
                 break;
 
             case 4:     // 4 - Dequeue
-                if (!(FRONT < 0))
+                if (front == NULL)   // Empty queue
+                    printf("Queue Underflow!\n");
+                else
                 {
-                    if (FRONT == REAR)          // Only 1 element in queue
+                    if (front == rear)          // Only 1 element in queue
                     {
-                        ELEMENT = QUEUE[FRONT];
+                        ELEMENT = front->data;
+                        front = rear = NULL;
                         printf("%d dequeued successfully!\n", ELEMENT);
-                        FRONT = REAR = -1;
                     }
                     else                        // Partially filled queue
                     {
-                        ELEMENT = QUEUE[FRONT];
-                        FRONT++;
+                        ELEMENT = front->data;
+                        front = front->next;    // increment to next node
                         printf("%d dequeued successfully!\n", ELEMENT);
                     }
                 } 
-                else                            // Empty queue
-                    printf("Queue Underflow!\n");
                 break;
 
             case 5:     // 5 - Exit

@@ -66,16 +66,16 @@ int main (void)
                 printf("Queue is alreay created!\n");
                 break;
             case 2:     // 2 - Traverse
-                if (FRONT < 0)
+                if (FRONT < 0)              // Empty queue
                 {
                     printf("\nEmpty Queue!\n\n");
                 }
-                else if (FRONT == REAR)
+                else if (FRONT == REAR)     // Single element
                 {
                     printf("\nQueue elements:\n");
                     printf("\n%d  <--  FRONT\n\n", QUEUE[REAR]);
                 }
-                else
+                else                        // More than one element
                 {
                     printf("\nQueue elements:\n");
                     int tmp = FRONT;
