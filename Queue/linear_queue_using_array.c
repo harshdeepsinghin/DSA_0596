@@ -56,7 +56,8 @@ int main (void)
 
     int QUEUE[SIZE];    // array declaration
 
-    MENU(0)
+    MENU(0);
+
     // main loop
     while ( CHOICE != 5 )
     {
@@ -65,23 +66,59 @@ int main (void)
 
         switch (CHOICE)
         {
-            case 0:
+            case 0:     // 0 - Menu
                 MENU(0);
                 break;
                 
-            case 1:
+            case 1:     // 1 - Create
                 printf("Queue is alreay created!\n");
                 break;
-            case 2:
+            case 2:     // 2 - Traverse
                 TRAVERSE(QUEUE,FRONT,REAR);
-            case 3:
-                printf("Enter the element to enter: ");
-                scanf(" %d", )
-            case 4:
-                printf("Queue is not created yet!\n");
+                break;
+            case 3:     // 3 - Enqueue
+                if (!isOVERFLOW(SIZE, REAR))    // Not empty
+                {
+                    printf("Enter the element to enqueue: ");
+                    scanf(" %d", &ELEMENT);
+                    if (isUNDERFLOW(FRONT))     // Empty queue
+                    {
+                        FRONT = REAR = 0;
+                        ENQUEUE(QUEUE,REAR,ELEMENT);
+                        printf("1st element - %d enqueued successfully!\n", ELEMENT);
+                    }
+                    else                        // Partially filled queue
+                    {
+                        REAR++;
+                        ENQUEUE(QUEUE,REAR,ELEMENT);
+                        printf("%d enqueued successfully!\n", ELEMENT);
+                    }
+                }
+                else                            // Full queue
+                    printf("Queue Overflow!\n");
                 break;
 
-            case 5:
+            case 4:     // 4 - Dequeue
+                if (!isUNDERFLOW(FRONT))
+                {
+                    if (FRONT == REAR)          // Only 1 element in queue
+                    {
+                        ELEMENT = DEQUEUE(QUEUE,FRONT);
+                        printf("%d dequeued successfully!\n", ELEMENT);
+                        FRONT = REAR = -1;
+                    }
+                    else                        // Partially filled queue
+                    {
+                        ELEMENT = DEQUEUE(QUEUE,FRONT);
+                        FRONT++;
+                        printf("%d dequeued successfully!\n", ELEMENT);
+                    }
+                } 
+                else                            // Empty queue
+                    printf("Queue Underflow!\n");
+                break;
+
+            case 5:     // 5 - Exit
                 printf("\nTata! See you soon...\n\n");
                 return 0;
         }
@@ -93,35 +130,43 @@ int main (void)
 // ENQUEUE function definition
 int ENQUEUE (int QUEUE[], int REAR, int ELEMENT)
 {
-    if ( !isOVERFLOW(SIZE, REAR) )
-    {
-        REAR++;
-        QUEUE[REAR] = ELEMENT;
-        return 0;
-    } 
-    return 1;
+    QUEUE[REAR] = ELEMENT;
+    return 0;
 }
 
 // DEQUEUE function definition
 int DEQUEUE (int QUEUE[], int FRONT)
 {
-    if ( !isUNDERFLOW(FRONT) )
-    {
-        int ELEMENT = QUEUE[FRONT];
-        FRONT++;
-        return ELEMENT;
-    } 
-    return -1;
+    int ELEMENT = QUEUE[FRONT];
+    return ELEMENT;
 }
 
 // TRAVERSE function definition
 int TRAVERSE (int QUEUE[], int FRONT, int REAR)
 {
-    int tmp = FRONT;
-    do
+    if (isUNDERFLOW(FRONT))
     {
-        printf("%d", QUEUE[tmp]);
-    } while ( tmp != REAR);
+        printf("\nEmpty Queue!\n\n");
+    }
+    else if (FRONT == REAR)
+    {
+        printf("\nQueue elements:\n");
+        printf("\n%d  <--  FRONT\n\n", QUEUE[REAR]);
+    }
+    else
+    {
+        printf("\nQueue elements:\n");
+        int tmp = FRONT;
+        printf("\n%d  <--  FRONT\n", QUEUE[tmp]);
+        tmp++;
+        while (tmp != REAR)
+        {
+            printf("%d\n", QUEUE[tmp]);
+            tmp++;
+        }
+        printf("%d  <--  REAR\n\n", QUEUE[tmp]);
+    }
+    
     return 0;
 }
 
@@ -155,9 +200,3 @@ void MENU (int SUBMENU)
             break;
     }
 }
-
-
-
-
-
-
