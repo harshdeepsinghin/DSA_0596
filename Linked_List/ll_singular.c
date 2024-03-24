@@ -3,17 +3,20 @@
 
 // typedef Declaration of Structures
 
-typedef struct
-    {
-        int data;
-        struct node *next;
-    } Node;
+typedef struct node Node;       // Alias for `struct node`
+typedef struct node *NodePTR;      // Alias for `struct node *`
 
-typedef Node *NodePTR;
+// structure definition
+Node
+{
+    int data;
+    NodePTR next;
+};
+
 
 // Functions Declaration
 
-int menu (int submenu);    // menu function declaration
+int MENU (int SUBMENU);    // menu function declaration
 NodePTR creation (NodePTR head, NodePTR newnode);    // creation function declaration
 NodePTR traverse (NodePTR head);    // traverse function declaration
 

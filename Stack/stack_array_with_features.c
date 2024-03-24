@@ -53,7 +53,7 @@ int main (void)
                 printf("\nStack is not created yet!\n\n");
                 break;
             case 6:    // 6 - Exit
-                printf("\nTata! See you soon..\n\n");
+                printf("\nTata! Come back soon..\n\n");
                 return 0;
                 break;
             default:
@@ -159,7 +159,7 @@ int main (void)
                 PREV1 = 1;
                 break;
             case 4:    // 4 - Exit
-                printf("\nTata! See you soon...\n\n");
+                printf("\nTata! Come back soon...\n\n");
                 return 0;
                 break;
             default:
