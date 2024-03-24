@@ -44,7 +44,7 @@ int main (void)
                 break;
 
             case 5:
-                printf("\nTata! See you soon...\n\n");
+                printf("\nTata! Come back soon...\n\n");
                 return 0;
         }
 
@@ -119,7 +119,7 @@ int main (void)
                 break;
 
             case 5:     // 5 - Exit
-                printf("\nTata! See you soon...\n\n");
+                printf("\nTata! Come back soon...\n\n");
                 return 0;
         }
 
@@ -195,7 +195,7 @@ void MENU (int SUBMENU)
         case 0:
             printf("\n\n### --- MAIN MENU --- ###\n\n0 - Main Menu (this)\n1 - Create\n2 - Traverse\n3 - Enqueue\n4 - Dequeue\n5 - Exit\n\n\n");
             break;
-        case 1:
+        case 1: //TODO
             printf("\n\n### --- CREATION MENU --- ###\n\n0 - Creation Menu (this)\n1 - Keep the queue empty\n2 - Enqueue multiple elements manually\n3 - Enqueue multiple elements randomly\n4 - Exit\n\n\n");
             break;
     }
