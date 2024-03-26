@@ -6,7 +6,7 @@ int main (void)
     int smallest, tmp_smallest;     // indices
     const int size = 6;
     int A[size] = {23,12,8,2,26,0};
-    int sorted;     // number of sorted elements
+    int sorted = 0;     // number of sorted elements
     int unsorted = size - sorted;
 
     for (int i=sorted; i<size; i++)
@@ -14,11 +14,12 @@ int main (void)
         smallest = i;
         for (int j=i; j<size; j++)
         {
-            if (A[j] > A[j+1])
+            if (A[i] > A[j+1])
             {
                 tmp_smallest=i+1;
             }
         }
+        printf("tmp_smallest: %d\n", tmp_smallest);
 
         // swapping
         int tmp = A[smallest];
