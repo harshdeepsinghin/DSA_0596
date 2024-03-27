@@ -22,7 +22,7 @@ int main (void)
         scanf(" %d", &A[i]);
     }
 
-    printf("\nOriginal Array:\n\n");
+    printf("Original Array:\n\n");
     for (int i=0; i<size; i++)
     {
         printf("%d ", A[i]);
@@ -30,13 +30,34 @@ int main (void)
     printf("\n\n");
     for (int i=sorted; i<size; i++)
     {
+        printf("Pass %d:\n", i+1);
         smallest = i;
         tmp_smallest=i;
         for (int j=i, k=1; j<size-1; j++,k++)
         {
+            printf("\tComparison %d:\n", k);
+            printf("\t\tA[%d]: %d",j, A[j]);
             if (A[tmp_smallest] > A[j+1])
+            {
+                printf("\n\t\t\tA[tmp_smallest] > A[j+1]\n");
+                printf("\n\t\t\t%d > %d\n", A[tmp_smallest], A[j+1]);
                 tmp_smallest=j+1;
+                printf("\t\t\ttmp_smallest: %d\t", tmp_smallest);
+                printf("A[tmp_smallest]: %d\n", A[tmp_smallest]);
+            }
+            else
+            {
+                printf("\n\t\t\tA[tmp_smallest] > A[j+1]\n");
+                printf("\n\t\t\t%d < %d\n", A[tmp_smallest], A[j+1]);
+                printf("\t\t\ttmp_smallest: %d\t", tmp_smallest);
+                printf("A[tmp_smallest]: %d\n", A[tmp_smallest]);
+            }
         }
+
+        printf("\tsmallest: %d\t", smallest);
+        printf("A[smallest]: %d\n", A[smallest]);
+        printf("\ttmp_smallest: %d\t", tmp_smallest);
+        printf("A[tmp_smallest]: %d\n", A[tmp_smallest]);
 
         // swapping
         int tmp = A[smallest];
@@ -55,7 +76,7 @@ int main (void)
     printf("Sorted Array: ");
     for (int i=0; i<size; i++)
     {
-        printf("%d ", A[i]);
+        printf("%d\t", A[i]);
     }
     printf("\n");
 }
