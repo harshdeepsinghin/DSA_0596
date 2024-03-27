@@ -33,8 +33,7 @@ int main (void)
     while ( ARRAY_DECLARED != 1)
     {
         printf("Query: ");
-        scanf(" %d%c",&QUERY1,&tmp);
-        tmp = -1;
+        scanf(" %d",&QUERY1);
         switch (QUERY1)
         {
             case 0:    // 0 - Main Menu
@@ -146,7 +145,7 @@ int main (void)
                 PREV1 = 1;
                 break;
             case 3:    // 3 - Exit
-                printf("\nTata! See you soon...\n\n");
+                printf("\nTata! Come back soon...\n\n");
                 return 0;
                 break;
             default:
