@@ -4,7 +4,7 @@
 // Functions Declaration
 
 int menu (int submenu);    // menu function declaration
-int traverse (int ARRAYPARAM[], int ARRAYSIZE, int LOWERBOUND, int UPPERBOUND);       // traverse function declaration
+int traverse (int ARRAYPARAM[], int ARRAYSIZE, int *LOWERBOUND, int *UPPERBOUND);       // traverse function declaration
 
 
 int main (void)
@@ -21,8 +21,8 @@ int main (void)
     int SIZE;            // SIZE is the max size of array
     int INPUT_NUMBER;    // INPUT_NUMBER is the number of elements to input or generate randomly
     int INPUT_ZERO;      // to check if the input numbers are zero or not
-    int LB = 0;     // LB containing index 0
-    int UB = -1;    // UB contains the index till the elements are filled
+    int *LB = NULL;     // LB contains the first location
+    int *UB = NULL;    // UB contains the location of last filled element
     int ARRAY_DECLARED = 0;       // identifier to check whether the Array is declared or not 
     int ARRAY_DEFINED = 0;        // identifier to check whether the Array is defined or not
     int ELEMENT_FOUND = 0;        // identifier to find element in linear search while insertion or deletion
@@ -107,13 +107,13 @@ int main (void)
                 
                 if ( INPUT_NUMBER != 0 )
                 {
-                    for (int i = LB;i < INPUT_NUMBER;i++)
+                    for (int i = 0;i < INPUT_NUMBER;i++)
                     {
                         printf("Enter element (%d): ", i);
                         scanf(" %d", &ARRAY[i]);
                     }
-                }
-                UB = INPUT_NUMBER - 1;    // UB contains the index of last filled element
+                    UB = &ARRAY[INPUT_NUMBER-1];
+                } 
                 PREV1 = 1;
                 break;
             case 2:    // 2 - Random elements
@@ -136,12 +136,12 @@ int main (void)
                 
                 if ( INPUT_NUMBER != 0 )
                 {
-                    for (int i = LB;i < INPUT_NUMBER;i++)
+                    for (int i = 0;i < INPUT_NUMBER;i++)
                     {
                         ARRAY[i] = rand() % 1000;    // it will return random numbers from 0 to 999
                     }
+                    UB = &ARRAY[INPUT_NUMBER-1];
                 }
-                UB = INPUT_NUMBER - 1;    // UB contains the index of last filled element
                 PREV1 = 1;
                 break;
             case 3:    // 3 - Exit
@@ -176,7 +176,7 @@ int main (void)
                 printf("\nArray is already created!\n\n");
                 break;
             case 2:    // 2 - Traverse an array
-                if ( UB == -1 )
+                if ( UB == NULL )
                 {
                     printf("\nArray is empty (UNDERFLOW). Ready for operations.\n\n");
                 }
@@ -194,7 +194,7 @@ int main (void)
                 QUERY13 = -1;
                 while ( QUERY13 != 6 )
                 {
-                    if ( UB-LB+1 == SIZE )
+                    if ( UB == &ARRAY[SIZE] )
                     {
                         printf("\nArray is full! (OVERFLOW) No more elements can be inserted.\n\n");
                         break;
@@ -209,17 +209,17 @@ int main (void)
                             menu(13);
                             break;
                         case 1:    // 1 - At the beginning
-                            for (int i=UB; i>=LB; i--)
+                            for (int *i=UB; i>=LB; i--)
                             {
-                                ARRAY[i+1] = ARRAY[i];
+                                *(i+1) = *i;
                             }
                             printf("Enter the element to insert: ");
-                            scanf(" %d", &ARRAY[LB]);
+                            scanf(" %d", LB);
                             UB++;
                             break;
                         case 2:    // 2 - At the end
                             printf("Enter the element to insert: ");
-                            scanf(" %d", &ARRAY[UB+1]);
+                            scanf(" %d", (UB+1));
                             UB++;
                             break;
                         case 3:    // 3 - At a particular location
@@ -227,9 +227,9 @@ int main (void)
                             traverse(ARRAY,SIZE,LB,UB);
                             printf("Enter the index where element to insert: ");
                             scanf(" %d", &tmp);
-                            for (int i=UB; i>=tmp; i--)
+                            for (int *i=UB; i>=&ARRAY[tmp]; i--)
                             {
-                                ARRAY[i+1] = ARRAY[i];
+                                *(i+1) = *i;
                             }
                             printf("Enter the element to insert: ");
                             scanf(" %d", &ARRAY[tmp]);
@@ -253,19 +253,19 @@ int main (void)
                                         printf("Enter the element before which you want to insert: ");
                                         scanf(" %d", &value);
                                         ELEMENT_FOUND = 0;
-                                        for ( int i = LB; i <= UB; i++ )
+                                        for ( int *i = LB; i <= UB; i++ )
                                         {
-                                            if ( ARRAY[i] == value )
+                                            if ( *LB == value )
                                             {
                                                 ELEMENT_FOUND = 1;
-                                                for (int j=UB; j>=i; j--)
+                                                for (int *j=UB; j>=i; j--)
                                                 {
-                                                    ARRAY[j+1] = ARRAY[j];
+                                                    *(j+1) = *j;
                                                 }
                                                 printf("Enter the element to insert: ");
-                                                scanf(" %d", &ARRAY[i]);
+                                                scanf(" %d", i);
                                                 PREV1 = 1;
-                                                UB++;
+                                                UB++;   //doubt
                                                 break;
                                             }
                                         }
@@ -276,19 +276,19 @@ int main (void)
                                         printf("Enter the element after which you want to insert: ");
                                         scanf(" %d", &value);
                                         ELEMENT_FOUND = 0;
-                                        for ( int i = LB; i <= UB; i++ )
+                                        for ( int *i = LB; i <= UB; i++ )
                                         {
-                                            if ( ARRAY[i] == value )
+                                            if ( *LB == value )
                                             {
                                                 ELEMENT_FOUND = 1;
-                                                for (int j=UB; j>i; j--)
+                                                for (int *j=UB; j>i; j--)
                                                 {
-                                                    ARRAY[j+1] = ARRAY[j];
+                                                    *(j+1) = *j;
                                                 }
                                                 printf("Enter the element to insert: ");
-                                                scanf(" %d", &ARRAY[i+1]);
+                                                scanf(" %d", (i+1));
                                                 PREV1 = 1;
-                                                UB++;
+                                                UB++;   //doubt
                                                 break;
                                             }
                                         }
@@ -299,7 +299,7 @@ int main (void)
                                         PREV1 = 1;
                                         break;
                                     case 4:    // 4 - Exit
-                                        printf("\nTata! See you soon...\n\n");
+                                        printf("\nTata! Come back soon...\n\n");
                                         return 0;
                                         break;
                                     default:
@@ -317,7 +317,7 @@ int main (void)
                             PREV1 = 1;
                             break;
                         case 6:
-                            printf("\nTata! See you soon...\n\n");
+                            printf("\nTata! Come back soon...\n\n");
                             return 0;
                             break;
                         default:
@@ -337,11 +337,17 @@ int main (void)
                 menu(14);
                 while ( QUERY14 != 6 )
                 {
-                    if ( UB < LB )
+                    if ( UB == NULL )
                     {
                         printf("\nArray is empty! (UNDERFLOW) No more elements can be deleted.\n\n");
                         break;
                     } 
+                    else if ( LB == UB )
+                    {
+                        LB = UB = NULL;
+                        printf("First and only element deleted!\n");
+                        break;
+                    }
                     printf("Query (Deletion): ");
                     scanf("%d",&QUERY14);
                     switch (QUERY14)
@@ -351,20 +357,23 @@ int main (void)
                             traverse(ARRAY,SIZE,LB,UB);
                             menu(14);
                             break;
+
                         case 1:    // 1 - At the beginning
                             // free(ARRAY[LB]);
-                            for (int i=LB; i<=UB; i++)
+                            for (int *i=LB; i<=UB; i++)
                             {
-                                ARRAY[i] = ARRAY[i+1];    // Array shifted towards left
+                                *i = *(i+1);    // Array shifted towards left
                             }
-                            UB--;
+                            UB--;   //doubt
                             printf("Element at the beginning deleted!\n");
                             break;
+
                         case 2:    // 2 - At the end
                             // free(ARRAY[UB]);
-                            UB--;
+                            UB--;   //doubt
                             printf("Element at the end deleted!\n");
                             break;
+
                         case 3:    // 3 - At a particular location
                             printf("\nArray's elements:");
                             traverse(ARRAY,SIZE,LB,UB);
@@ -372,11 +381,11 @@ int main (void)
                             printf("Enter the index of the element to delete: ");
                             scanf(" %d", &tmp);
                             // free(ARRAY[tmp]);
-                            for (int i=tmp; i<=UB; i++)
+                            for (int *i=&ARRAY[tmp]; i<=UB; i++)
                             {
-                                ARRAY[i] = ARRAY[i+1];
+                                *i = *(i+1);
                             }
-                            UB--;
+                            UB--;   //doubt
                             printf("Element at the particular location (index: %d) deleted!\n", tmp);
                             break;
                         case 4:    // 4 - Before or after an element
@@ -396,28 +405,28 @@ int main (void)
                                     case 1:    // 1 - Before an element
                                         printf("Enter the index of the element before which you want to delete: ");
                                         scanf(" %d", &tmp);
-                                        for (int i=tmp; i<=UB; i++)
+                                        for (int *i=&ARRAY[tmp]; i<=UB; i++)
                                         {
-                                            ARRAY[i-1] = ARRAY[i];
+                                            *(i-1) = *i;
                                         }
-                                        UB--;
+                                        UB--;   //doubt
                                         printf("Element at the before location (index: %d) deleted!\n", tmp);
                                         break;
                                     case 2:    // 2 - After an element
                                         printf("Enter the index of the element after which you want to delete: ");
                                         scanf(" %d", &tmp);
-                                        for (int i=tmp+1; i<=UB; i++)
+                                        for (int *i=(&ARRAY[tmp]+1); i<=UB; i++)
                                         {
-                                            ARRAY[i] = ARRAY[i+1];
+                                            *i = *(i+1);
                                         }
-                                        UB--;
+                                        UB--;   //doubt
                                         printf("Element at the after location (index: %d) deleted!\n", tmp);
                                         break;
                                     case 3:    // 3 - Back to Main Menu
                                         PREV1 = 1;
                                         break;
                                     case 4:    // 4 - Exit
-                                        printf("\nTata! See you soon...\n\n");
+                                        printf("\nTata! Come back soon...\n\n");
                                         return 0;
                                         break;
                                     default:
@@ -435,7 +444,7 @@ int main (void)
                             PREV1 = 1;
                             break;
                         case 6:
-                            printf("\nTata! See you soon...\n\n");
+                            printf("\nTata! Come back soon...\n\n");
                             return 0;
                             break;
                         default:
@@ -450,7 +459,7 @@ int main (void)
                 }
                 break;
             case 5:    // 5 - Exit
-                printf("\nTata! See you soon..\n\n");
+                printf("\nTata! Come back soon..\n\n");
                 return 0;
                 break;
             default:
@@ -461,12 +470,12 @@ int main (void)
     return 0;     
 }
 
-int traverse (int ARRAYPARAM[], int ARRAYSIZE, int LOWERBOUND, int UPPERBOUND)
+int traverse (int ARRAYPARAM[], int ARRAYSIZE, int *LOWERBOUND, int *UPPERBOUND)
 {
-    printf("\nIndex\tValue\n");
-    for (int i = LOWERBOUND;i <= UPPERBOUND;i++)
+    printf("\nAddress\tValue\n");
+    for (int *i = 0; i < ARRAYARRAYSIZE; i++)
     {
-        printf("%d\t%d\n",i,ARRAYPARAM[i]);
+        printf("%d\t%d\n", i, ARRAYPARAM[i]);
     }
     printf("\n");
     return 0;
