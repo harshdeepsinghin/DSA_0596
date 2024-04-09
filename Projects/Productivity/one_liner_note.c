@@ -1,19 +1,55 @@
 #include <stdio.h>
 
-int main (void)
-{
-    FILE *checker, *fptr;
+// typedef
 
-    checker = fopen("data/one_liner_notes.csv", "r");
+typedef char *string;
+
+// Variables declaration
+
+string DATA_FILE = "data/one_liner_notes.csv";
+
+
+int main (int argc, char* argv[])
+{
+    FILE *checker, *fptr;   // FILE pointers declaration
+
+    checker = fopen(DATA_FILE, "r");
 
     if (checker == NULL)
     {
-        char *str = "hey, hi, hello";
-        fptr = fopen("data/one_liner_notes.csv", "a+");
-        fputs(str, fptr);
+        fclose(checker);
+        string attributes = "hey, hi, hello";
+        fptr = fopen(DATA_FILE, "a+");
+        fputs(attributes, fptr);
+        fclose(fptr);
     }
-
-    fclose(checker);
-    fclose(fptr);
+    printf("You have entered %d arguments.\n", argc);
     
+    while (argc > 1)
+    {
+        while (argv[1][0] == '-')
+        {
+            switch (argv[1][1])
+            {
+                case 'a':
+                    printf("a is %s\n", argv[2]);
+                    break;
+                case 'b':
+                    printf("b is %s\n", argv[2]);
+                    break;
+                default:
+                    printf("default\n");
+                    break;
+            }
+            argv++;
+            argc--;
+        }
+        argv++;
+        argc--;
+    }
+    
+    return 0;
 }
+
+
+
