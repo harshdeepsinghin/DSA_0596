@@ -11,6 +11,12 @@ created-date: 2024-02-13 09:34
 
 ## Observations
 
+### Is there any hybrid graph?
+
+### What is Isolated vertex, Parallel edges and Isomorphic Graph?
+
+### What is (Level, Height) of (Tree, Node). What is Depth of a tree
+
 ### Segmentation fault in fopen
 > [!abstract]
 > Happens when opening a file in wrong directory or path that does not exist. For example opening `hello.txt` as `FILE *fptr = fopen("data/hello.txt", "w");` will give the error whereas `FILE *fptr = fopen("hello.txt", "w");` will not give the error. It occurred because `data` directory does not exists and it cannot create directories. It can only create files.
