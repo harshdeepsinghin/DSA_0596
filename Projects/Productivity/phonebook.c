@@ -15,7 +15,7 @@ int main (void)
     struct contact_info person;
 
     printf("Enter your name: ");
-    scanf("%s", person.name);
+    fgets(person.name, 15, stdin);
     puts(person.name);
     printf("Enter your number: ");
     scanf("%s", person.number);
