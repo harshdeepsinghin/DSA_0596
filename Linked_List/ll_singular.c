@@ -3,15 +3,15 @@
 
 // typedef Declaration of Structures
 
-typedef struct node Node;       // Alias for `struct node`
-typedef struct node *NodePTR;      // Alias for `struct node *`
-
-// structure definition
-Node
+typedef struct node
 {
     int data;
-    NodePTR next;
-};
+    struct node *next;
+} Node;       // Alias for `struct node`
+
+
+typedef Node *NodePTR;      // Alias for `struct node *`
+
 
 
 // Functions Declaration
@@ -30,7 +30,7 @@ int main (void)
     NodePTR head = NULL;
     NodePTR newnode;
 
-    menu(1);
+    MENU(1);
     QUERY1 = -1;
     while ( QUERY1 != 5 )
     {
@@ -39,7 +39,7 @@ int main (void)
         switch (QUERY1)
         {
             case 0:
-                menu(1);
+                MENU(1);
                 break;
             case 1:
                 if ( head == NULL )

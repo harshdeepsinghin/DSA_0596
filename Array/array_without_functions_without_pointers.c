@@ -208,6 +208,7 @@ int main (void)
                             traverse(ARRAY,SIZE,LB,UB);
                             menu(13);
                             break;
+
                         case 1:    // 1 - At the beginning
                             for (int i=UB; i>=LB; i--)
                             {
@@ -217,11 +218,13 @@ int main (void)
                             scanf(" %d", &ARRAY[LB]);
                             UB++;
                             break;
+
                         case 2:    // 2 - At the end
                             printf("Enter the element to insert: ");
                             scanf(" %d", &ARRAY[UB+1]);
                             UB++;
                             break;
+
                         case 3:    // 3 - At a particular location
                             printf("\nArray's elements:");
                             traverse(ARRAY,SIZE,LB,UB);
@@ -235,6 +238,7 @@ int main (void)
                             scanf(" %d", &ARRAY[tmp]);
                             UB++;
                             break;
+                            
                         case 4:    // 4 - Before or after an element
                             printf("\nArray's elements:");
                             traverse(ARRAY,SIZE,LB,UB);
