@@ -1,5 +1,7 @@
 #include <stdio.h>
 
+void traverse(int ARRAY[], int size, int option);
+
 int main (void)
 {
     // Variable declarations
@@ -22,12 +24,8 @@ int main (void)
         scanf(" %d", &A[i]);
     }
 
-    printf("Original Array:\n\n");
-    for (int i=0; i<size; i++)
-    {
-        printf("%d ", A[i]);
-    }
-    printf("\n\n");
+    traverse(A, size, 1);
+
     for (int i=sorted; i<size; i++)
     {
         printf("Pass %d:\n", i+1);
@@ -65,18 +63,41 @@ int main (void)
         A[tmp_smallest] = tmp;
 
         sorted++;
-        printf("\tArray after %d pass:\n\n\t", sorted);
-        for (int i=0; i<size; i++)
-        {
-            printf("%d ", A[i]);
-        }
-        printf("\n\n");
+        traverse(A, size, 3);
     }
 
-    printf("Sorted Array: ");
-    for (int i=0; i<size; i++)
+    traverse(A, size, 2);
+}
+
+void traverse(int ARRAY[], int size, int option)
+{
+    switch (option)
     {
-        printf("%d\t", A[i]);
+        case 1:
+            printf("\nOriginal Array: ");
+            for (int i=0; i<size; i++)
+            {
+                printf("%d ", ARRAY[i]);
+            }
+            printf("\n");
+            break;
+
+        case 2:
+            printf("\nSorted Array: ");
+            for (int i=0; i<size; i++)
+            {
+                printf("%d ", ARRAY[i]);
+            }
+            printf("\n");
+            break;
+
+        case 3:
+            printf("\n\tPartially Sorted Array: ");
+            for (int i=0; i<size; i++)
+            {
+                printf("%d ", ARRAY[i]);
+            }
+            printf("\n");
+            break;
     }
-    printf("\n");
 }
