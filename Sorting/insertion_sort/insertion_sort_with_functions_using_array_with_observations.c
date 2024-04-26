@@ -21,29 +21,29 @@ int main (void)
         scanf(" %d", &ARRAY[i]);
     }
 
-    traverse(ARRAY, size, 1);     // original array
+    traverse(ARRAY,size,1);     // original array
 
-    // outer loop will iterate from 0 to n-1 as sorted
-    for (int sorted=0; sorted<size-1; sorted++)
+    // outer loop will iterate from 1 to n-1 as pass
+    for (int pass=1; pass<size; pass++)
     {
-        printf("\n\nPass %d:\n", sorted+1);
+        printf("\n\nPass %d:\n", pass);
         // inner loop will iterate from pass to 1 as comp
-        for (int comp=0; comp<size-sorted-1; comp++)
+        for (int comp=pass; comp>0; comp--)
         {
-            printf("\n\tComparison %d:\n", comp+1);
-            if (ARRAY[comp]>ARRAY[comp+1])
+            printf("\n\tComparison %d:\n", pass - comp + 1);
+            if (ARRAY[comp]<ARRAY[comp-1])
             {
+                printf("\t\t%d is less than %d, therefore\n", ARRAY[comp], ARRAY[comp-1]);
                 // Swapping
-                int tmp = ARRAY[comp+1];
-                ARRAY[comp+1] = ARRAY[comp];
+                int tmp = ARRAY[comp-1];
+                ARRAY[comp-1] = ARRAY[comp];
                 ARRAY[comp] = tmp;
-                printf("\t\t%d is greater than %d, therefore\n", ARRAY[comp], ARRAY[comp+1]);
-                printf("\t\t%d and %d swapped!\n", ARRAY[comp], ARRAY[comp+1]);
+                printf("\t\t%d and %d swapped!\n", ARRAY[comp], ARRAY[comp-1]);
             }
             else
             {
-                printf("\t\t%d is not greater than %d, therefore\n", ARRAY[comp], ARRAY[comp+1]);
-                printf("\t\t%d and %d not swapped!\n", ARRAY[comp], ARRAY[comp+1]);
+                printf("\t\t%d is not less than %d, therefore\n", ARRAY[comp], ARRAY[comp-1]);
+                printf("\t\t%d and %d not swapped!\n", ARRAY[comp], ARRAY[comp-1]);
             }
             traverse(ARRAY,size,3);
         }
