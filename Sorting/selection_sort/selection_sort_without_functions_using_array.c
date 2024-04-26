@@ -22,7 +22,7 @@ int main (void)
         scanf(" %d", &A[i]);
     }
 
-    printf("\nOriginal Array:\n\n");
+    printf("\nOriginal Array: ");
     for (int i=0; i<size; i++)
     {
         printf("%d ", A[i]);
@@ -44,12 +44,6 @@ int main (void)
         A[tmp_smallest] = tmp;
 
         sorted++;
-        printf("\tArray after %d pass:\n\n\t", sorted);
-        for (int i=0; i<size; i++)
-        {
-            printf("%d ", A[i]);
-        }
-        printf("\n\n");
     }
 
     printf("Sorted Array: ");

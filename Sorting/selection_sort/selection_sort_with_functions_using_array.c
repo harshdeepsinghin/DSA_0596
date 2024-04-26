@@ -42,12 +42,6 @@ int main (void)
         A[tmp_smallest] = tmp;
 
         sorted++;
-        printf("\tArray after %d pass:\n\n\t", sorted);
-        for (int i=0; i<size; i++)
-        {
-            printf("%d ", A[i]);
-        }
-        printf("\n\n");
     }
 
     traverse(A, size, 2);
