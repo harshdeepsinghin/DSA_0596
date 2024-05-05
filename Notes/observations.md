@@ -11,8 +11,6 @@ created-date: 2024-02-13 09:34
 
 ## Observations
 
-### 
-
 ### Is there any hybrid graph?
 
 ### What is Isolated vertex, Parallel edges and Isomorphic Graph?
