@@ -191,10 +191,11 @@ It will print the most inner printf() first then moves outwards.
 ### Declare an array then intialize it
 
 ```C
-int size;
-size = 5;
-int A[size];
-A[size] = {5,8,1,39}; //error
+int size; // Declaration
+size = 5; // Initialisation
+int size = 5; // Definition
+int A[size]; // Declaration
+A[size] = {5,8,1,39}; //error on Initialisation
 return 0;
 ```
 
@@ -211,9 +212,9 @@ make: *** [play] Error 1
 ```
 
 
-In C, you can't assign values to an array using the syntax `A[size] = {1,2,3,4,5};` outside of the declaration. This syntax is only allowed at the time of declaration. 
+In C, you can't assign values to an array using the syntax `A[size] = {1,2,3,4,5};` after the declaration. This syntax is only allowed at the time of declaration. 
 
-If you want to initialize an array after declaration, you can assign values to individual elements using a loop or by direct assignment, as shown in the previous examples. 
+If you want to initialise an array after declaration, you can assign values to individual elements using a loop or by direct assignment, as shown in the previous examples. 
 
 Here's an example of how you can initialize an array after declaration:
 
